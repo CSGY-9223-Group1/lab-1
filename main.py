@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    note1 = note.Note(1, 'user1', 'note1')
-    return json.dumps(note1.__dict__)
+  note1 = note.Note(1, 'user1', 'note1')
+  return json.dumps(note1.__dict__)
 
 @app.route('/register')
 def register():
@@ -23,4 +23,4 @@ def add_note():
   return "in add_note"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+  app.run(host='0.0.0.0', port=5000)
