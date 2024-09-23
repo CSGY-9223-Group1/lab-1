@@ -52,6 +52,7 @@ def register():
   jwt_data = {"user": content['id']}
   
   encoded_jwt = jwt.encode(jwt_data, secret_key, algorithm="HS256")
+  print('JWT generated - ' + encoded_jwt)
   user1 = user.User(content['id'], content['name'], encoded_jwt)
   users[content['id']] = user1
   return json.dumps(user1.__dict__)
@@ -79,19 +80,11 @@ def get_all_notes(current_user):
   json_string = json.dumps([ob.__dict__ for ob in ret_list])
   return json_string
 
-'''
 
-@app.route('/get_all_notes', methods=['GET'])
+@app.route('/delete_note', methods=['POST'])
 @token_required
-def get_all_notes(current_user):
-  content = request.json
-  input_note = content['note']
-  is_public = content['is_public']
-  note_object = note.Note(len(notes) + 1, str(current_user.get_userid()), str(input_note), is_public)
-  notes[note_object.note_id] = note_object
-  return json.dumps(note_object.__dict__)
-
-'''
+def delete_note(current_user):
+  return "to_implement"
  
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)
