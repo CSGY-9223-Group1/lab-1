@@ -75,7 +75,7 @@ def get_all_notes(current_user):
   ret_list = []
   for key, value in notes.items():
         note_v = cast(note.Note, value)
-        if (note_v.is_public == True or current_user.get_userid() == note_v.get_owner_id):
+        if (note_v.is_public == True or current_user.get_userid() == note_v.owner_id):
           ret_list.append(note_v)
   json_string = json.dumps([ob.__dict__ for ob in ret_list])
   return json_string
@@ -84,7 +84,15 @@ def get_all_notes(current_user):
 @app.route('/delete_note', methods=['POST'])
 @token_required
 def delete_note(current_user):
-  return "to_implement"
+  content = request.json
+  id_to_delete = content['note_id']
+  if notes.get(id_to_delete) is not None:
+      note_v = cast(note.Note, notes.get(id_to_delete))
+      if (note_v.note_id == id_to_delete and current_user.get_userid() == note_v.owner_id):
+          notes.pop(id_to_delete)
+      else:
+          return "{\"status\": \"note not found\"}"
+  return "{\"status\": \"success\"}"
  
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=5000)
+  app.run(host='0.0.0.0', port=5005)

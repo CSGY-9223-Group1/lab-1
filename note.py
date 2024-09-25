@@ -15,16 +15,16 @@ class Note:
         return self.note_id
     
     def get_owner_id(self):
-        return self.owner_idowner_id
+        return self.owner_id
     
     def get_note(self):
-        return self.notenote
+        return self.note
     
     def set_note(self, upd_note):
         self.note = upd_note
     
     def get_note(self):
-        return self.notenote
+        return self.note
     
     def toJson(self):
         return json.dumps(self, default=lambda o: o.__dict__)
