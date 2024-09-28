@@ -1,31 +1,25 @@
 # lab-1
-Lab 1 paste bin
 
-Register user (/register)
-Input - emailID (used as ID), name
-Response - On successful registration will return user object with a JWT token (http 200)
-JWT token is generated based on only email ID locally.
+## Available Endpoints
 
-Add Note (/add_note)
-Input - JWT token (http header "token"), note object - {note, is_public}
-Response - Note object after successful posting
-Here, jwt token will be validated
+| Action | Endpoint | HTTP Method | Header| Body | Result |
+|--------|----------|-------------|-------|------|--------|
+| Register user | `/register` | `POST` | | (JSON): `{"id": <User_Email>, "name": <User_Name>}` | On successful registration (`HTTP 200`) will return user object with a JWT token. JWT token is generated based on only email ID locally.|
+| Add Note | `/add_note` | `GET` | `token`: JWT token obtained during registration | (JSON): `{"note": <note body>, "is_public": <boolean set to true if note is public>}` | Note object after successful posting. Here, JWT token will be validated. |
+| Home page | `/` | `GET` | | | Return all the public notes (`HTTP 200`)|
+| Get all notes | `/get_all_notes` | `GET` | `token`: JWT token obtained during registration | | All public listed notes + user's private notes (`HTTP 200`). Here, JWT token will be validated. 
+| Delete a note | `/delete_note` | `token`: JWT token obtained during registration | (JSON) `{"note_id": <ID_of_note_of_interest>`}| | `HTTP 200`. Here, JWT token will be validated.
 
-Home page (/)
-Input - N/A
-Response - Return all the Public notes (http 200)
+## Usage
 
-Get all notes (/get_all_notes)
-Input - JWT token (http header "token")
-Response - All public listed notes + user's private notes (http 200)
-Here, jwt token will be validated
+### Setting Up the Appication
+Build docker image: `docker build --tag pastebin-docker-group1 .` (Note the period at the end of the command)
 
-Delete a note (/delete_note)
-Input - JWT token (http header "token"), note object - {note_id}
-Response - http 200
-Here, jwt token will be validated
+### Running the Application
+Run docker image as container: `docker run -p 5001:5000 pastebin-docker-group1`
 
-Build docker image - docker build --tag pastebin-docker-group1 . 
-Run docker image as container - docker run -p 5001:5000 pastebin-docker-group1
+Please, note that currently the app doesn't use persistent storage. This means that when the app is shut down, information about users and notes will be lost.
 
-App doesn't use Persistent storage. It uses dynamic memory. This means when App is shut down, Users, Notes will be lost
+
+
+
