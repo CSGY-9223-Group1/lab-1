@@ -95,4 +95,4 @@ def delete_note(current_user):
   return "{\"status\": \"success\"}"
  
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=5005)
+  app.run(host='0.0.0.0', port=5000)
