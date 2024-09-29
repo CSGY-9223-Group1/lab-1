@@ -93,6 +93,21 @@ def delete_note(current_user):
       else:
           return "{\"status\": \"note not found\"}"
   return "{\"status\": \"success\"}"
- 
+
+
+@app.route('/update_note', methods=['POST'])
+@token_required
+def update_note(current_user):
+  content = request.json
+  id_to_update = content['note_id']
+  note_new_content = content['note']
+  if notes.get(id_to_update) is not None:
+      note_v = cast(note.Note, notes.get(id_to_update))
+      if (note_v.note_id == id_to_update and current_user.get_userid() == note_v.owner_id):
+          notes[id_to_update].set_note(note_new_content)
+      else:
+          return "{\"status\": \"note not found\"}"
+  return "{\"status\": \"success\"}"
+
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5005)
