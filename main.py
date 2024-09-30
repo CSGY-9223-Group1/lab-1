@@ -109,8 +109,8 @@ def delete_note(current_user):
 @token_required
 def update_note(current_user):
     content = request.json
-    id_to_update = content['note_id']
-    note_new_content = content['note']
+    id_to_update = content["note_id"]
+    note_new_content = content["note"]
     if notes.get(id_to_update) is not None:
         note_v = cast(note.Note, notes.get(id_to_update))
         if (
@@ -121,6 +121,7 @@ def update_note(current_user):
         else:
             return '{"status": "note not found"}'
     return '{"status": "success"}'
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5005)
