@@ -7,12 +7,13 @@ from functools import wraps
 import sys
 import traceback
 from typing import cast
+import os
 
 app = Flask(__name__)
 
 users = {}
 notes = {}
-secret_key = "group1"
+secret_key = os.environ["PASTEBIN_JWT_SECRET"]
 
 
 def token_required(f):
