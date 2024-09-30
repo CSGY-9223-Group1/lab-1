@@ -1,0 +1,2 @@
+# need this to prevent Docker build copying sensitive information into a Docker image
+.env
