@@ -15,7 +15,6 @@ users = {}
 notes = {}
 secret_key = os.environ["PASTEBIN_JWT_SECRET"]
 
-
 def token_required(f):
     def decorated(*args, **kwargs):
         token = None
@@ -122,7 +121,6 @@ def update_note(current_user):
         else:
             return '{"status": "note not found"}'
     return '{"status": "success"}'
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
