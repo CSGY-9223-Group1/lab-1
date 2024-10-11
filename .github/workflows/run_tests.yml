@@ -1,10 +1,10 @@
-name: Hello World Echo
+name: Run tests 
 on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  echo_hello_on_push:
+  run_tests_on_merge:
     runs-on: ubuntu-latest 
     steps:
-      - name: Echo Hello World on push
-        run: echo "Hello world"
+      - name: Run tests on merge 
+        run: echo "To add trigger for running test cases on merge"

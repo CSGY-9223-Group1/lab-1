@@ -1,10 +1,10 @@
-name: Hello World Echo
+name: Security check 
 on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  echo_hello_on_push:
+  security_check_on_merge:
     runs-on: ubuntu-latest 
     steps:
-      - name: Echo Hello World on push
-        run: echo "Hello world"
+      - name: Security check on merge 
+        run: echo "Add security checks"
