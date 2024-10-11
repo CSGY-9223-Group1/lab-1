@@ -1,6 +1,7 @@
 name: Hello World Echo
-on: push
-
+on:
+  pull_request:
+    branches: [ "main" ]
 jobs:
   echo_hello_on_push:
     runs-on: self-hosted 
