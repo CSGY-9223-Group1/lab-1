@@ -4,7 +4,7 @@ on:
     branches: [ "main" ]
 jobs:
   echo_hello_on_push:
-    runs-on: self-hosted 
+    runs-on: self-hosted
     steps:
       - name: Echo Hello World on push
         run: echo "Hello world"
