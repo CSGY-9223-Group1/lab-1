@@ -122,5 +122,6 @@ def update_note(current_user):
             return '{"status": "note not found"}'
     return '{"status": "success"}'
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
