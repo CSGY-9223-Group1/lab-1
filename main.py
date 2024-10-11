@@ -15,7 +15,6 @@ users = {}
 notes = {}
 secret_key = os.environ["PASTEBIN_JWT_SECRET"]
 
-
 def token_required(f):
     def decorated(*args, **kwargs):
         token = None
