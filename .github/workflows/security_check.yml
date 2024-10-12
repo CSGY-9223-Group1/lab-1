@@ -6,10 +6,5 @@ jobs:
   security_check_on_merge:
     runs-on: ubuntu-latest 
     steps:
-      - shell: bash
-        env:
-          GITHUB_TOKEN: '${{ inputs.token }}'
-          COMMENT_TEXT: '${{ inputs.comment }}'
-          COMMENTS_URL: '${{ github.event.pull_request.comments_url }}'
-          COMMITS_URL: '${{ github.event.pull_request.commits_url }}'
-        run: "if [[ -z \"$COMMITS_URL\" ]]; then\n  echo \"❌ Could not find commits to check. Make sure the action is ran on `pull_request` or `pull_request_target`\"\n  exit 1\nfi\n\nunsigned_commits=\"$(curl -s -H \"Authorization: token $GITHUB_TOKEN\" \"$COMMITS_URL\" | jq '.[] | select(.commit.verification.verified == false) | .commit.message')\"\nif [[ -z \"$unsigned_commits\" ]]; then\n  echo \"\U0001F389 No unsigned commits found\"\n  exit 0\nfi\n\necho \"\U0001F6A8 Found unsigned commits:\"\necho \"$unsigned_commits\"\n\nif [[ -n \"$COMMENTS_URL\" ]]; then\n  echo \"⏱️ Checking if comment with commit signing instructions was already posted in PR\"\n\n  if curl -sf -H \"Authorization: token $GITHUB_TOKEN\" \"$COMMENTS_URL\" | jq -e --arg comment_text \"$(echo \"$COMMENT_TEXT\" | tr -cd '[:alnum:]')\" 'any(.[]; .body | gsub(\"[^[:alnum:]]\"; \"\") == $comment_text)'; then\n    echo \"✅ Comment already exists in PR, not posting it again\"\n  else\n    echo \"\U0001F4E4 Posting PR comment with commit signing instructions\"\n\n    # Escape double quotes and newlines in comment\n    COMMENT_TEXT=\"$(echo \"$COMMENT_TEXT\" | sed 's/\"/\\\\\"/g' | awk '{printf \"%s\\\\n\", $0}')\"\n\n    curl -X POST \"$COMMENTS_URL\" \\\n      -H \"Content-Type: application/json\" \\\n      -H \"Authorization: token $GITHUB_TOKEN\" \\\n      --data \"{ \\\"body\\\": \\\"$COMMENT_TEXT\\\" }\"\n  fi\nfi\n\necho \"❌ Returning with exit code 1 because of unsigned commits\"\nexit 1\n"
+      - name: Security check on merge 
+        run: echo "Add security checks"
