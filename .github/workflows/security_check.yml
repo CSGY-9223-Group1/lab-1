@@ -6,5 +6,5 @@ jobs:
   security_check_on_merge:
     runs-on: ubuntu-latest 
     steps:
-      - name: Security check on merge 
-        run: echo "Add security checks"
+      - name: Check signed commits in PR
+        run: 1Password/check-signed-commits-action@v1
