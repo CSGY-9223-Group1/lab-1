@@ -1,7 +1,6 @@
 name: Push build to docker hub
 on: push
 
-
 jobs:
   publish_to_docker:
     runs-on: ubuntu-latest
