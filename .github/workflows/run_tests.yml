@@ -22,7 +22,7 @@ jobs:
 
       - name: Debug info
         run: |
-          echo "Python version ${python3 --version}"
+          python --version
           echo "Working dir ${pwd}"
           echo "Dir contents ${ls -l}"
           echo "Contents site packages - ${ls -l /venv/lib/python*/site-packages}"
