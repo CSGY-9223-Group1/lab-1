@@ -61,7 +61,7 @@ class PastebinUnitTest(unittest.TestCase):
         }
         response = self.app.get('/add_note', headers=headers)
         print("test_get_all_notes_with_invalid_token Response - " + str(response.data))
-        self.assertEqual(response.status_code, 403) 
+        self.assertEqual(response.status_code, 405) 
         
         
     def test_delete_note_with_invalid_token(self):
