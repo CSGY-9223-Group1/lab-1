@@ -25,7 +25,6 @@ jobs:
           python --version
           pwd
           ls -l
-          ls -l /venv/lib/python*/site-packages
 
       - name: Run tests
         run: python -m unittest app_test.py
