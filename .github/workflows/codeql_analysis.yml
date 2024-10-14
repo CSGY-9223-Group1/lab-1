@@ -1,0 +1,10 @@
+name: CodeQL static analysis
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  call-codeQL-analysis:
+    name: CodeQL analysis
+    uses: actions/reusable-workflows/.github/workflows/codeql-analysis.yml@main
