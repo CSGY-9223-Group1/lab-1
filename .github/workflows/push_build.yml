@@ -27,6 +27,6 @@ jobs:
             tags: ajitshrivastav/pastebin:latest
 
       - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v2
         with:
             artifact-path: ajitshrivastav/pastebin
