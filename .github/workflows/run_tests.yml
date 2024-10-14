@@ -23,9 +23,9 @@ jobs:
       - name: Debug info
         run: |
           python --version
-          echo "Working dir ${pwd}"
-          echo "Dir contents ${ls -l}"
-          echo "Contents site packages - ${ls -l /venv/lib/python*/site-packages}"
+          pwd
+          ls -l
+          ls -l /venv/lib/python*/site-packages
 
       - name: Run tests
         run: python -m unittest app_test.py
