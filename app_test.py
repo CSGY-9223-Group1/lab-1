@@ -83,36 +83,5 @@ class PastebinUnitTest(unittest.TestCase):
         self.assertEqual(response.status_code, 403) 
 
 
-'''
-    # Test the greet route with query parameters
-    def test_greet_with_name(self):
-        response = self.app.get('/greet?name=John')
-        json_data = response.get_json()
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(json_data, {"message": "Hello, John!"})
-
-    # Test the greet route without query parameters
-    def test_greet_without_name(self):
-        response = self.app.get('/greet')
-        json_data = response.get_json()
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(json_data, {"message": "Hello, Guest!"})
-
-    # Test POST request to sum route with valid data
-    def test_sum_numbers_valid(self):
-        response = self.app.post('/sum', json={'a': 5, 'b': 3})
-        json_data = response.get_json()
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(json_data, {"result": 8})
-
-    # Test POST request to sum route with invalid data
-    def test_sum_numbers_invalid(self):
-        response = self.app.post('/sum', json={'a': 5})
-        json_data = response.get_json()
-        self.assertEqual(response.status_code, 400)
-        self.assertEqual(json_data, {"error": "Bad request"})
-
-'''
-
 if __name__ == '__main__':
     unittest.main()
