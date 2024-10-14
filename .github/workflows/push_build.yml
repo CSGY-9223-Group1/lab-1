@@ -1,6 +1,9 @@
 name: Push build to docker hub
 on: push
 
+env:
+  IMAGE_NAME: ajitshrivastav/pastebin
+
 jobs:
   publish_to_docker:
     runs-on: ubuntu-latest
@@ -18,15 +21,16 @@ jobs:
         with:
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_TOKEN }}
-            
-      - name: Build and push app image to Docker
-        uses: docker/build-push-action@v4
-        with:
-            context: .
-            push: true
-            tags: ajitshrivastav/pastebin:latest
 
-      - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v2
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
         with:
-            artifact-path: ajitshrivastav/pastebin
+            images: ${{ env.IMAGE_NAME }}
+    
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+            sbom: true
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
