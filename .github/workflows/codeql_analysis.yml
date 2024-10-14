@@ -1,9 +1,8 @@
 name: CodeQL static analysis
 
 on:
-  pull_request:
-    branches: ['main']
-
+    pull_request:
+        branches: [ "main" ]
 jobs:
   call-codeQL-analysis:
     name: CodeQL analysis
