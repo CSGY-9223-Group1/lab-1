@@ -18,6 +18,7 @@ secret_key = 'secret'#os.environ["PASTEBIN_JWT_SECRET"]
 def token_required(f):
     def decorated(*args, **kwargs):
         token = None
+        tokenStatic = 'abc12345abc12345abc12345abc12345abc12345abc'
         token_header = request.headers.get("token")
         if not token_header:
             return jsonify({"error": "token is missing"}), 403
