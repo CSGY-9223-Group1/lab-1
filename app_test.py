@@ -42,7 +42,7 @@ class PastebinUnitTest(unittest.TestCase):
         self.assertEqual(response.status_code, 403) 
 
     def test_update_note_without_token(self):
-        response = self.app.post('/delete_note')
+        response = self.app.post('/update_note')
         self.assertEqual(response.status_code, 403) 
         
     def test_get_all_notes_with_invalid_token(self):
