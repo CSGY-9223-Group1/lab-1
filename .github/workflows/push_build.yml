@@ -16,7 +16,7 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        
+
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -32,6 +32,11 @@ jobs:
         with:
             images: ${{ env.IMAGE_NAME }}
     
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v3
+        with:
+            artifact-path: ${{ env.IMAGE_NAME }}
+
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
