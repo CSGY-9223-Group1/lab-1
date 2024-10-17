@@ -35,11 +35,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
             images: ${{ env.IMAGE_NAME }}
-    
-      - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v1
-        with:
-            subject-path: ajitshrivastav/pastebin
+
 
       - name: Build and push image
         uses: docker/build-push-action@v6
@@ -47,3 +43,9 @@ jobs:
             sbom: true
             push: true
             tags: ${{ steps.meta.outputs.tags }}
+
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+            subject-path: '${{ github.workspace }}/pastebin'
+
