@@ -39,7 +39,7 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
         with:
-            artifact-path: ${{ env.IMAGE_NAME }}
+            artifact-path: pastebin
 
       - name: Build and push image
         uses: docker/build-push-action@v6
