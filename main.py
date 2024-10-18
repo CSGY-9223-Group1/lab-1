@@ -19,7 +19,6 @@ def token_required(f):
     def decorated(*args, **kwargs):
         token = None
         token_header = request.headers.get("token")
-        github_secret = "123963c1434c377428ca8531fbc46c0c43d037a1"
         if not token_header:
             return jsonify({"error": "token is missing"}), 403
         try:
