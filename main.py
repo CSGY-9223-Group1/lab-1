@@ -8,13 +8,15 @@ import sys
 import traceback
 from typing import cast
 import os
+import environ
 
 app = Flask(__name__)
 
 users = {}
 notes = {}
-secret_key = 'secret'#os.environ["PASTEBIN_JWT_SECRET"]
-aws_secret_access_key = "ASIAY34FZKBOKMUTVV7A"
+#secret_key = 'secret'#os.environ["PASTEBIN_JWT_SECRET"]
+secret_key = os.environ.get("SECRET_KEY")
+
 def token_required(f):
     def decorated(*args, **kwargs):
         token = None
