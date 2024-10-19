@@ -13,7 +13,8 @@ app = Flask(__name__)
 
 users = {}
 notes = {}
-secret_key = 'secret'#os.environ["PASTEBIN_JWT_SECRET"]
+var_s = 's1'
+var_password = 'password123'
 
 def token_required(f):
     def decorated(*args, **kwargs):
@@ -23,7 +24,7 @@ def token_required(f):
             return jsonify({"error": "token is missing"}), 403
         try:
             print("token - " + token_header)
-            token = jwt.decode(token_header, secret_key, algorithms=["HS256"])
+            token = jwt.decode(token_header, var_s, algorithms=["HS256"])
             print(json.dumps(token))
             current_user = users.get(token["user"])
             print("current user - " + json.dumps(current_user.__dict__))
