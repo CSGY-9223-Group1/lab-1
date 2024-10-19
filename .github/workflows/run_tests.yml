@@ -6,12 +6,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest 
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}  
 
     steps:
-      - name: Secret from env
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}  
-        run: echo $SECRET_KEY
 
       - name: Checkout code 
         uses: actions/checkout@v2
