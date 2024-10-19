@@ -14,7 +14,6 @@ app = Flask(__name__)
 users = {}
 notes = {}
 secret_key = 'secret'#os.environ["PASTEBIN_JWT_SECRET"]
-db_password = "MySuperSecretPassword123"
 def token_required(f):
     def decorated(*args, **kwargs):
         token = None
