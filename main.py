@@ -8,7 +8,6 @@ import sys
 import traceback
 from typing import cast
 import os
-import environ
 
 app = Flask(__name__)
 
