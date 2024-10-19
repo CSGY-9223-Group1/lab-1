@@ -8,6 +8,11 @@ jobs:
     runs-on: ubuntu-latest 
 
     steps:
+      - name: Secret from env
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}  
+        run: echo $SECRET_KEY
+
       - name: Checkout code 
         uses: actions/checkout@v2
 
