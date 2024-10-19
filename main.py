@@ -14,7 +14,7 @@ app = Flask(__name__)
 users = {}
 notes = {}
 var_s = 's1'
-var_password = 'password123'
+db_password = "MySuperSecretPassword123"
 
 def token_required(f):
     def decorated(*args, **kwargs):
