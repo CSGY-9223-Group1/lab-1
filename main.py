@@ -13,7 +13,6 @@ app = Flask(__name__)
 
 users = {}
 notes = {}
-#secret_key = 'secret'#os.environ["PASTEBIN_JWT_SECRET"]
 secret_key = os.environ.get("SECRET_KEY")
 
 def token_required(f):
