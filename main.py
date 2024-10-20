@@ -11,8 +11,8 @@ import os
 
 app = Flask(__name__)
 
-users: Dict [str,str] = {}
-notes: Dict [int, str] = {}
+users: dict[str,str] = {}
+notes: dict[int, str] = {}
 secret_key = os.environ.get("SECRET_KEY")
 
 def token_required(f):
