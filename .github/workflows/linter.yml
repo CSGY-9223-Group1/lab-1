@@ -14,5 +14,4 @@ jobs:
       - name: Python Linter
         uses: sunnysid3up/python-linter@master
         with:
-          mypy-options: "--ignore-errors"
           django: false
