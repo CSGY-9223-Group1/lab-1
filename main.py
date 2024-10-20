@@ -12,8 +12,8 @@ import typing
 
 app = Flask(__name__)
 
-users: dict[str,str] = {}
-notes: dict[int, str] = {}
+users: typing.Dict[str,str] = {}
+notes: typing.Dict[int, str] = {}
 secret_key = os.environ.get("SECRET_KEY")
 
 def token_required(f):
