@@ -12,9 +12,10 @@ import typing
 
 app = Flask(__name__)
 
-users: typing.Dict[str,str] = {}
+users: typing.Dict[str, str] = {}
 notes: typing.Dict[int, str] = {}
 secret_key = os.environ.get("SECRET_KEY")
+
 
 def token_required(f):
     def decorated(*args, **kwargs):
@@ -122,6 +123,7 @@ def update_note(current_user):
         else:
             return '{"status": "note not found"}'
     return '{"status": "success"}'
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5005, debug=True)
