@@ -122,6 +122,14 @@ def update_note(current_user):
             return '{"status": "note not found"}'
     return '{"status": "success"}'
 
+@app.route("/playful_headers")
+def playful_headers():
+    user_header = request.args["user_header"]
+    response = Response()
+    custom_user_header = "X-MyHeader-" + user_header
+    # Allows the user create their own HTTP response headers for fun
+    response.headers[custom_user_header] = "HeaderValue" 
+    return response
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5005)
