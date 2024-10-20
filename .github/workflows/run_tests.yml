@@ -2,9 +2,32 @@ name: Run tests
 on:
   pull_request:
     branches: [ "main" ]
+
 jobs:
-  run_tests_on_merge:
+  build:
     runs-on: ubuntu-latest 
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}  
+
     steps:
-      - name: Run tests on merge 
-        run: echo "To add trigger for running test cases on merge"
+
+      - name: Checkout code 
+        uses: actions/checkout@v2
+
+      - name: Setup env
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Setup virtual env
+        run: |
+          python -m pip install -r requirements.txt
+
+      - name: Debug info
+        run: |
+          python --version
+          pwd
+          ls -l
+
+      - name: Run tests
+        run: python -m unittest app_test.py

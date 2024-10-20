@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 users = {}
 notes = {}
-secret_key = os.environ["PASTEBIN_JWT_SECRET"]
+secret_key = os.environ.get("SECRET_KEY")
 
 def token_required(f):
     def decorated(*args, **kwargs):
@@ -30,7 +30,7 @@ def token_required(f):
         except Exception as ex:
             print("Exception")
             traceback.print_exception(type(ex), ex, ex.__traceback__)
-            return jsonify({"error": "token is invalid/expired"})
+            return jsonify({"error": "token is invalid/expired"}), 403
         return f(current_user, *args, **kwargs)
 
     decorated.__name__ = f.__name__
@@ -122,5 +122,6 @@ def update_note(current_user):
             return '{"status": "note not found"}'
     return '{"status": "success"}'
 
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5005)
