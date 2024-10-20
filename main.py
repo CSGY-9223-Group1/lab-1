@@ -11,7 +11,7 @@ import os
 
 app = Flask(__name__)
 
-users = {}
+users: Dict[] = {}
 notes = {}
 secret_key = os.environ.get("SECRET_KEY")
 
