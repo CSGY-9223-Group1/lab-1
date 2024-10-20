@@ -3,14 +3,12 @@ on:
       branches: [ main ]
     pull_request:
       branches: [ main ]
+
+steps:
+- name: Checkout code
+  uses: actions/checkout@v4
   
-jobs:
-    test:
-      steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        
-      - name: Python Linter
-        uses: sunnysid3up/python-linter@v0.1-beta.7
-        with:
-          django: false 
+- name: Python Linter
+  uses: sunnysid3up/python-linter@v0.1-beta.7
+  with:
+    django: false 
