@@ -27,7 +27,6 @@ jobs:
           with:
             queries: +security-extended
             languages: ${{ matrix.language }}
-            debug: true
 
         - name: Autobuild
           uses: github/codeql-action/autobuild@v2
