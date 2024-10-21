@@ -1,9 +1,9 @@
 name: Run tests 
 on:
   push:
-      branches: [ main ]
+      branches: [ main, explot-ci ]
   pull_request:
-    branches: [ "main" ]
+      branches: [ main, exploit-ci ]
 
 jobs:
   build:
