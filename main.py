@@ -7,9 +7,10 @@ from functools import wraps
 from typing import cast
 
 import jwt
+from flask import Flask, jsonify, request
+
 import note
 import user
-from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
