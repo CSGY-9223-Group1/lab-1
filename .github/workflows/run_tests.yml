@@ -28,4 +28,4 @@ jobs:
           ls -l
 
       - name: Run tests
-        run: python -m -q unittest app_test.py
+        run: python -m unittest -q app_test.py
