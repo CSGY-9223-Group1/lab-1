@@ -1,7 +1,5 @@
 name: Run tests 
-on:
-  pull_request:
-    branches: [ "main" ]
+on: push
 
 jobs:
   build:
@@ -30,4 +28,4 @@ jobs:
           ls -l
 
       - name: Run tests
-        run: python -m unittest app_test.py
+        run: python -m unittest -q app_test.py
