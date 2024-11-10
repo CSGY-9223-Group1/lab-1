@@ -1,4 +1,4 @@
-name: Run tests 
+name: Generate SBOM
 on:
   pull_request:
     branches: [ "main" ]
@@ -14,5 +14,6 @@ jobs:
         uses: aquasecurity/trivy-action@0.28.0
         with:
           scan-type: 'fs'
+          output: trivy-report.json
           scan-ref: '.'
           cache: 'false'
