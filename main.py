@@ -1,19 +1,23 @@
-from flask import Flask, request, jsonify
-import note
-import user
 import json
-import jwt
-from functools import wraps
+import os
 import sys
 import traceback
+import typing
+from functools import wraps
 from typing import cast
-import os
+
+import jwt
+from flask import Flask, jsonify, request
+
+import note
+import user
 
 app = Flask(__name__)
 
-users = {}
-notes = {}
+users: typing.Dict[str, str] = {}
+notes: typing.Dict[int, str] = {}
 secret_key = os.environ.get("SECRET_KEY")
+
 
 def token_required(f):
     def decorated(*args, **kwargs):
