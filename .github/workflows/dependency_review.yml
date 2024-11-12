@@ -1,7 +1,7 @@
 name: Github dependency review
 on:
-  push:
-    branches: [ "ajit" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   dependency-review:
