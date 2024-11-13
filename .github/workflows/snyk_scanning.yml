@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-go@v1
         with:
           go-version: '1.13'
-      - name: Run Snyk to check for vulnerabilities
+      - name: Run Snyk vulnerability scanning
         uses: snyk/actions/python-3.10@master
         env: 
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
