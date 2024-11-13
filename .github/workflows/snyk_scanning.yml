@@ -1,6 +1,6 @@
 name: Snyk scanning
 on: 
-  pull_request:
+  push:
     branches: [ "ajit" ]
 jobs:
   security:

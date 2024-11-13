@@ -1,7 +1,5 @@
 name: Trivy scanning
 on:
-  pull_request:
-    branches: [ "main" ]
   push:
     branches: [ "ajit" ]
 
