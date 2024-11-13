@@ -6,11 +6,7 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: snyk/actions/setup@master
-      - uses: actions/setup-go@v1
-        with:
-          go-version: '1.13'
+      - uses: actions/checkout@v2
       - name: Run Snyk vulnerability scanning
         uses: snyk/actions/python-3.10@master
         env: 
