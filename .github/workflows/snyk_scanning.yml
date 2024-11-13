@@ -1,7 +1,7 @@
 name: Snyk scanning
-on: 
-  push:
-    branches: [ "ajit" ]
+on:
+  pull_request:
+    branches: [ "main" ]
 jobs:
   security:
     runs-on: ubuntu-latest

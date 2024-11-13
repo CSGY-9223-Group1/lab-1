@@ -1,7 +1,7 @@
 name: Trivy scanning
 on:
-  push:
-    branches: [ "ajit" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
