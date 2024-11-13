@@ -1,0 +1,26 @@
+name: Generate SBOM
+on:
+  push:
+    branches: [ "ajit", "main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          format: 'github'
+          output: 'lab-1.sbom.json'
+          image-ref: '.'
+
+      - name: Upload the SBOM report as github artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-sbom-report
+          path: '${{ github.workspace }}/lab-1.sbom.json'
+          retention-days: 5

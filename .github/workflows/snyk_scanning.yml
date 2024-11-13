@@ -1,0 +1,14 @@
+name: Snyk scanning
+on:
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Snyk vulnerability scanning
+        uses: snyk/actions/python-3.10@master
+        env: 
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        
