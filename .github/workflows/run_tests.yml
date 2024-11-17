@@ -28,6 +28,7 @@ jobs:
           pipenv run python --version
           pwd
           ls -l
+          pipenv requirements
 
       - name: Run tests
         run: pipenv run python -m unittest -q app_test.py
