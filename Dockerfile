@@ -4,9 +4,8 @@ FROM python:3.8-alpine
 
 WORKDIR /lab-1
 
-COPY requirements.txt requirements.txt
 RUN python -m pip install pipenv
-RUN pipenv install -r requirements.txt
+RUN pipenv install
 
 COPY . /lab-1
 
