@@ -21,14 +21,15 @@ jobs:
         run: |
           python -m pip install pipenv
           pipenv install
+          pipenv shell
 
 
       - name: Debug info
         run: |
-          pipenv run python --version
+          python --version
           pwd
           ls -l
           pipenv requirements
 
       - name: Run tests
-        run: pipenv run python -m unittest -q app_test.py
+        run: python -m unittest -q app_test.py
