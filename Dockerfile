@@ -4,10 +4,10 @@ FROM python:3.8-alpine
 
 WORKDIR /lab-1
 
+COPY . /lab-1
+
 RUN python -m pip install pipenv
 RUN pipenv install
-
-COPY . /lab-1
 
 EXPOSE 5000
 
