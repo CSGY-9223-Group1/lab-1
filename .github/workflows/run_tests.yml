@@ -22,7 +22,6 @@ jobs:
           python -m pip install pipenv
           pipenv install
 
-
       - name: Debug info
         run: |
           pipenv run python --version
