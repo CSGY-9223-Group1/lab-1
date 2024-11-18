@@ -1,5 +1,7 @@
 name: Push build to docker hub
-on: push
+on:
+  push:
+    branches: [ main ]
 
 env:
   IMAGE_NAME: ajitshrivastav/pastebin
