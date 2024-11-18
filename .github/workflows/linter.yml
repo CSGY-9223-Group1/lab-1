@@ -16,14 +16,11 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Setup virtual env
+      - name: Install pipenv
         run: |
-          pipenv install
+          python -m pip install pipenv
       
-      - name: Install black
-        run:
+      - name: Setup and run black linter
+        run: |
           pipenv install black
-      
-      - name: Run black linter
-        run:
           pipenv run black -v .
