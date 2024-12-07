@@ -14,16 +14,13 @@ jobs:
       - name: Setup env
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: "3.10"
 
-      - name: Setup virtual env
+      - name: Install pipenv
         run: |
-          python -m pip install -r requirements.txt
+          python -m pip install pipenv
       
-      - name: Install black
-        run:
-          pip install black
-      
-      - name: Run black linter
-        run:
-          black -v .
+      - name: Setup and run black linter
+        run: |
+          pipenv install black
+          pipenv run black -v .
