@@ -40,6 +40,7 @@ jobs:
 
 
       - name: Build and push image
+        id: push
         uses: docker/build-push-action@v6
         with:
             sbom: true
@@ -53,4 +54,12 @@ jobs:
         uses: actions/attest-build-provenance@v1
         with:
             subject-path: '.'
+      
+      - name: Attest image
+        uses: actions/attest-build-provenance@v1
+        id: attest
+        with:
+          subject-name: ${{ env.IMAGE_NAME }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+
 
