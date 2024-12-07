@@ -5,7 +5,6 @@ on:
 
 env:
   IMAGE_NAME: ajitshrivastav/pastebin
-
 jobs:
   publish_to_docker:
     runs-on: ubuntu-latest
