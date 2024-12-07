@@ -1,4 +1,5 @@
 name: Snyk scanning
+
 on:
   pull_request:
     branches: [ "main" ]
