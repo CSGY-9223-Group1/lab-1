@@ -145,6 +145,52 @@ class PastebinUnitTest(unittest.TestCase):
         self.assertTrue(test_note["is_public"])
         self.assertEqual(test_note["note_id"], _note_id)
 
+    def test_integration_register_post_public_list_and_delete(self):
+        _name = "Stephen S"
+        _id = "stephen@stephen.com"
+
+        # Registration phase
+        reg_resp = self.app.post("/register", json={"id": _id, "name": _name})
+        reg_resp_payload = json.loads(reg_resp.get_json())
+        _token = reg_resp_payload["token"]
+
+        headers = {"Content-Type": "application/json", "token": _token}
+
+        # Posting phase
+        note_payload = {"note": "test public note", "is_public": True}
+        add_resp = self.app.post("/add_note", headers=headers, json=note_payload)
+        note_response_payload = json.loads(add_resp.get_json())
+
+        _note_id = note_response_payload["note_id"]
+
+        self.assertEqual(add_resp.status_code, 200)
+        self.assertEqual(note_response_payload["note"], note_payload["note"])
+        self.assertEqual(note_response_payload["owner_id"], _id)
+
+        # Listing public notes
+        headers_no_jwt = {"Content-Type": "application/json"}
+
+        list_resp = self.app.get("/", headers=headers_no_jwt)
+
+        # Since the note created was public, it should be accessible at root URL
+        test_note = json.loads(
+            [n for n in list_resp.get_json() if f'"note_id": {_note_id}' in n][0]
+        )
+
+        self.assertEqual(test_note["note_id"], _note_id)
+
+        # Delete phase
+        del_payload = {"note_id": _note_id}
+        del_resp = self.app.post("/delete_note", headers=headers, json=del_payload)
+        del_resp_payload = json.loads(del_resp.get_json())
+
+        self.assertEqual(del_resp_payload["status"], "success")
+
+        list_resp = self.app.get("/", headers=headers_no_jwt)
+        self.assertEqual(
+            len([n for n in list_resp.get_json() if f'"note_id": {_note_id}' in n]), 0
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

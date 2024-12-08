@@ -48,8 +48,7 @@ def home():
         note_v = cast(note.Note, value)
         if note_v.is_public == True:
             ret_list.append(note_v)
-    json_string = json.dumps([ob.__dict__ for ob in ret_list])
-    return json_string
+    return jsonify([n.toJson() for n in ret_list])
 
 
 @app.route("/register", methods=["POST"])
@@ -108,7 +107,7 @@ def delete_note(current_user):
             notes.pop(id_to_delete)
         else:
             return '{"status": "note not found"}'
-    return '{"status": "success"}'
+    return jsonify('{"status": "success"}')
 
 
 @app.route("/update_note", methods=["POST"])
