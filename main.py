@@ -48,22 +48,22 @@ def home():
         note_v = cast(note.Note, value)
         if note_v.is_public == True:
             ret_list.append(note_v)
-    json_string = json.dumps([ob.__dict__ for ob in ret_list])
-    return json_string
+    return jsonify([n.toJson() for n in ret_list])
 
 
 @app.route("/register", methods=["POST"])
 def register():
     content = request.json
     if content["id"] in users.keys():
-        return '{"error": "ID already registered"}'
+        return jsonify('{"error": "ID already registered"}')
     jwt_data = {"user": content["id"]}
 
     encoded_jwt = jwt.encode(jwt_data, secret_key, algorithm="HS256")
     print("JWT generated - " + encoded_jwt)
     user1 = user.User(content["id"], content["name"], encoded_jwt)
     users[content["id"]] = user1
-    return json.dumps(user1.__dict__)
+
+    return jsonify(user1.toJson())
 
 
 @app.route("/add_note", methods=["POST"])
@@ -71,13 +71,14 @@ def register():
 def add_note(current_user):
     print("current user - " + json.dumps(current_user.__dict__))
     content = request.json
+    print(content)
     input_note = content["note"]
     is_public = content["is_public"]
     note_object = note.Note(
         len(notes) + 1, str(current_user.get_userid()), str(input_note), is_public
     )
     notes[note_object.note_id] = note_object
-    return json.dumps(note_object.__dict__)
+    return jsonify(note_object.toJson())
 
 
 @app.route("/get_all_notes", methods=["GET"])
@@ -88,8 +89,8 @@ def get_all_notes(current_user):
         note_v = cast(note.Note, value)
         if note_v.is_public == True or current_user.get_userid() == note_v.owner_id:
             ret_list.append(note_v)
-    json_string = json.dumps([ob.__dict__ for ob in ret_list])
-    return json_string
+    json_string = json.dumps([n.toJson() for n in ret_list])
+    return jsonify([n.toJson() for n in ret_list])
 
 
 @app.route("/delete_note", methods=["POST"])
@@ -106,7 +107,7 @@ def delete_note(current_user):
             notes.pop(id_to_delete)
         else:
             return '{"status": "note not found"}'
-    return '{"status": "success"}'
+    return jsonify('{"status": "success"}')
 
 
 @app.route("/update_note", methods=["POST"])
@@ -114,17 +115,21 @@ def delete_note(current_user):
 def update_note(current_user):
     content = request.json
     id_to_update = content["note_id"]
-    note_new_content = content["note"]
     if notes.get(id_to_update) is not None:
         note_v = cast(note.Note, notes.get(id_to_update))
         if (
             note_v.note_id == id_to_update
             and current_user.get_userid() == note_v.owner_id
         ):
-            notes[id_to_update].set_note(note_new_content)
+            if "note" in content:
+                note_new_content = content["note"]
+                notes[id_to_update].set_note(note_new_content)
+            if "is_public" in content:
+                notes[id_to_update].is_public = content["is_public"]
+
         else:
             return '{"status": "note not found"}'
-    return '{"status": "success"}'
+    return jsonify('{"status": "success"}')
 
 
 if __name__ == "__main__":
