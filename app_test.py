@@ -111,7 +111,6 @@ class PastebinUnitTest(unittest.TestCase):
 
         # Registration phase
         reg_resp = self.app.post("/register", json={"id": _id, "name": _name})
-        print(reg_resp.get_json())
         r_dict = json.loads(reg_resp.get_json())
         _token = r_dict["token"]
 
