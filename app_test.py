@@ -101,7 +101,6 @@ class PastebinUnitTest(unittest.TestCase):
         update_payload = {"note_id": _note_id, "note": "updated test note"}
         upd_resp = self.app.post("/update_note", headers=headers, json=update_payload)
         update_response_payload = json.loads(upd_resp.get_json())
-        print(update_response_payload)
 
         self.assertEqual(upd_resp.status_code, 200)
         self.assertEqual(update_response_payload["status"], "success")
@@ -133,7 +132,6 @@ class PastebinUnitTest(unittest.TestCase):
         update_payload = {"note_id": _note_id, "is_public": True}
         upd_resp = self.app.post("/update_note", headers=headers, json=update_payload)
         update_response_payload = json.loads(upd_resp.get_json())
-        print(update_response_payload)
 
         self.assertEqual(upd_resp.status_code, 200)
         self.assertEqual(update_response_payload["status"], "success")
